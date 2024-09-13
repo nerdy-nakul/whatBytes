@@ -91,11 +91,11 @@ const Modal = ({ onClose, onSave }) => {
   };
 
   return (
-    <div className="p-10 md:p-0 flex justify-center items-center fixed inset-0 bg-gray-800 bg-opacity-50 z-50">
-      <div className="bg-white p-8 rounded-lg w-full max-w-3xl relative">
-        <div className="flex justify-between mb-6">
-          <div className="text-2xl font-bold">Update Scores</div>
-          <div className="w-16 h-16">
+    <div className="p-5 md:p-0 flex justify-center items-center fixed inset-0 bg-gray-800 bg-opacity-50 z-50">
+      <div className="bg-white p-6 md:p-8 rounded-lg w-full max-w-2xl md:max-w-3xl relative">
+        <div className="flex justify-between items-center mb-4 md:mb-6">
+          <div className="text-xl md:text-2xl font-bold">Update Scores</div>
+          <div className="w-12 h-12 md:w-16 md:h-16">
             <Image
               src="https://res.cloudinary.com/debw7vpqa/image/upload/v1721431123/html_apn4wf.jpg"
               alt="HTML logo"
@@ -104,22 +104,22 @@ const Modal = ({ onClose, onSave }) => {
             />
           </div>
         </div>
-        <form className="space-y-6 flex flex-col gap-5">
+        <form className="space-y-4 md:space-y-6 flex flex-col gap-5">
           {/* Rank Input */}
-          <div className="flex justify-between">
-            <label className="text-lg text-black mb-2">
-              <span className="bg-blue-800 text-sm text-white rounded-full px-2 py-1 mr-1">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
+            <label className="text-base md:text-lg text-black mb-1 md:mb-0">
+              <span className="bg-blue-800 text-xs md:text-sm text-white rounded-full px-2 py-1 mr-1">
                 1
               </span>{" "}
               Update your <span className="font-bold">Rank</span>
             </label>
-            <div>
+            <div className="w-full md:max-w-xs">
               <input
                 type="number"
                 value={stats.rank}
                 onChange={handleChange("rank")}
                 onFocus={() => handleFocus("rank")}
-                className="w-full max-w-xs font-bold border border-gray-300 rounded p-2 mb-1"
+                className="w-full font-bold border border-gray-300 rounded p-2 mb-1"
               />
               {touched.rank && errors.rank && (
                 <p className="text-red-500 text-sm">{errors.rank}</p>
@@ -128,20 +128,20 @@ const Modal = ({ onClose, onSave }) => {
           </div>
 
           {/* Percentile Input */}
-          <div className="flex justify-between">
-            <label className="text-lg text-black mb-2">
-              <span className="bg-blue-800 mr-1 text-sm text-white rounded-full px-2 py-1">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
+            <label className="text-base md:text-lg text-black mb-1 md:mb-0">
+              <span className="bg-blue-800 mr-1 text-xs md:text-sm text-white rounded-full px-2 py-1">
                 2
               </span>{" "}
               Update your <span className="font-bold">Percentile</span>
             </label>
-            <div>
+            <div className="w-full md:max-w-xs">
               <input
                 type="number"
                 value={stats.percentile}
                 onChange={handleChange("percentile")}
                 onFocus={() => handleFocus("percentile")}
-                className="w-full max-w-xs font-bold border border-gray-300 rounded p-2 mb-1"
+                className="w-full font-bold border border-gray-300 rounded p-2 mb-1"
               />
               {touched.percentile && errors.percentile && (
                 <p className="text-red-500 text-sm">{errors.percentile}</p>
@@ -150,21 +150,21 @@ const Modal = ({ onClose, onSave }) => {
           </div>
 
           {/* Score Input */}
-          <div className="flex justify-between">
-            <label className="text-lg text-black mb-2">
-              <span className="bg-blue-800 mr- text-sm text-white rounded-full px-2 py-1">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
+            <label className="text-base md:text-lg text-black mb-1 md:mb-0">
+              <span className="bg-blue-800 text-xs md:text-sm text-white rounded-full px-2 py-1">
                 3
               </span>{" "}
               Update your{" "}
               <span className="font-bold">Current Score (out of 15)</span>
             </label>
-            <div>
+            <div className="w-full md:max-w-xs">
               <input
                 type="number"
                 value={stats.score}
                 onChange={handleChange("score")}
                 onFocus={() => handleFocus("score")}
-                className="w-full max-w-xs font-bold border border-gray-300 rounded p-2 mb-1"
+                className="w-full font-bold border border-gray-300 rounded p-2 mb-1"
               />
               {touched.score && errors.score && (
                 <p className="text-red-500 text-sm">{errors.score}</p>
@@ -174,15 +174,15 @@ const Modal = ({ onClose, onSave }) => {
         </form>
 
         {/* Modal Buttons */}
-        <div className="flex justify-end mt-6 space-x-4">
+        <div className="flex justify-end mt-4 md:mt-6 space-x-3 md:space-x-4">
           <button
-            className="bg-white border-blue-800 border-2 font-bold text-blue-800 rounded px-4 py-2"
+            className="bg-white border-blue-800 border-2 font-bold text-blue-800 rounded px-3 py-2 md:px-4 md:py-2"
             onClick={onClose}
           >
             Cancel
           </button>
           <button
-            className="bg-blue-800 text-white rounded font-bold px-4 py-2"
+            className="bg-blue-800 text-white rounded font-bold px-3 py-2 md:px-4 md:py-2"
             onClick={handleSave}
           >
             Save

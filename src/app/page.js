@@ -10,9 +10,9 @@ export default function Home() {
   return (
     <div className="flex flex-col h-screen">
       <Navbar />
-      <div className="flex flex-1">
-        <SideBar data={{ data, setData }} />
-        <Content data={data} />
+      <div className="flex flex-1 flex-col md:flex-row">
+        <SideBar data={{ data, setData }} className="w-full md:w-1/4" />
+        <Content data={data} className="w-full md:w-3/4" />
       </div>
     </div>
   );

@@ -3,13 +3,17 @@ import React, { useState } from "react";
 import { SlBadge } from "react-icons/sl";
 import { IoDocumentOutline } from "react-icons/io5";
 
-const SideBar = ({data}) => {
-    // console.log(data)
+const SideBar = ({ data }) => {
   const [activeIndex, setActiveIndex] = useState(data.data);
+  const [isSidebarVisible, setIsSidebarVisible] = useState(false); // For mobile toggle
 
   const handleClick = (index) => {
     setActiveIndex(index);
     data.setData(index);
+  };
+
+  const toggleSidebar = () => {
+    setIsSidebarVisible((prevState) => !prevState);
   };
 
   const menuItems = [
@@ -25,41 +29,88 @@ const SideBar = ({data}) => {
   ];
 
   return (
-    <div className="hidden md:flex flex-col gap-5 py-8 border-r w-80">
-      {menuItems.map((item, index) => (
-        <div
-          key={index}
-          onClick={() => handleClick(index)}
-          className={` flex items-center pl-6 mr-5 gap-4 cursor-pointer ${
-            activeIndex === index
-              ? "bg-gray-100 text-blue-600"
-              : "text-slate-600"
-          } rounded-tr-full rounded-br-full py-4  transition-colors duration-300`}
-        >
-          {typeof item.icon === "string" ? (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="h-6 w-6"
+    <>
+      <div className="hidden md:flex flex-col gap-5 py-8 border-r w-80">
+        {menuItems.map((item, index) => (
+          <div
+            key={index}
+            onClick={() => handleClick(index)}
+            className={` flex items-center pl-6 mr-5 gap-4 cursor-pointer ${
+              activeIndex === index
+                ? "bg-gray-100 text-blue-600"
+                : "text-slate-600"
+            } rounded-tr-full rounded-br-full py-4 transition-colors duration-300`}
+          >
+            {typeof item.icon === "string" ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="h-6 w-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d={item.icon}
+                />
+              </svg>
+            ) : (
+              <div className="h-6 w-6 flex justify-center items-center text-2xl">
+                {item.icon}
+              </div>
+            )}
+            <div className="font-bold text-lg">{item.label}</div>
+          </div>
+        ))}
+      </div>
+
+      <button
+        onClick={toggleSidebar}
+        className="md:hidden p-2 text-blue-600 focus:outline-none"
+      >
+        {isSidebarVisible ? "Close Menu" : "Open Menu"}
+      </button>
+
+      {isSidebarVisible && (
+        <div className="md:hidden flex flex-col gap-5 py-8 border-r w-80 absolute top-0 left-0 h-full bg-white z-50">
+          {menuItems.map((item, index) => (
+            <div
+              key={index}
+              onClick={() => handleClick(index)}
+              className={` flex items-center pl-6 mr-5 gap-4 cursor-pointer ${
+                activeIndex === index
+                  ? "bg-gray-100 text-blue-600"
+                  : "text-slate-600"
+              } rounded-tr-full rounded-br-full py-4 transition-colors duration-300`}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d={item.icon}
-              />
-            </svg>
-          ) : (
-            <div className="h-6 w-6 flex justify-center items-center text-2xl">
-              {item.icon}
+              {typeof item.icon === "string" ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="h-6 w-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d={item.icon}
+                  />
+                </svg>
+              ) : (
+                <div className="h-6 w-6 flex justify-center items-center text-2xl">
+                  {item.icon}
+                </div>
+              )}
+              <div className="font-bold text-lg">{item.label}</div>
             </div>
-          )}
-          <div className="font-bold text-lg">{item.label}</div>
+          ))}
         </div>
-      ))}
-    </div>
+      )}
+    </>
   );
 };
 

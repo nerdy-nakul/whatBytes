@@ -22,34 +22,36 @@ const chartConfig = {
 };
 
 export function PieChart({ score }) {
-
   const chartData = [
     { browser: "chrome", visitors: score, fill: "rgb(37 99 235)" },
     { browser: "other", visitors: 15 - score, fill: "rgb(191 225 250)" },
   ];
-
 
   const totalVisitors = React.useMemo(() => {
     return chartData.reduce((acc, curr) => acc + curr.visitors, 0);
   }, [score]);
 
   return (
-    <div className="border rounded-lg p-10 mt-5">
-      <div className="flex justify-between">
-        <p className="font-bold text-lg">Question Analysis</p>
-        <p className="text-lg text-blue-700 font-bold">{`${score}/${totalVisitors}`}</p>
+    <div className="border rounded-lg p-4 md:p-6 lg:p-10 mt-4 md:mt-5">
+      <div className="flex flex-col md:flex-row justify-between">
+        <p className="font-bold text-lg text-center md:text-left">
+          Question Analysis
+        </p>
+        <p className="text-lg text-blue-700 font-bold text-center md:text-left">
+          {`${score}/${totalVisitors}`}
+        </p>
       </div>
-      <p className="text-gray-600 mt-2">
+      <p className="text-gray-600 mt-2 text-center md:text-left">
         <span className="font-bold">
           You scored {score} questions correct out of 15.
         </span>{" "}
-        However it still needs some improvements
+        However, it still needs some improvements.
       </p>
       <Card className="flex flex-col">
         <CardContent className="flex-1 pb-0">
           <ChartContainer
             config={chartConfig}
-            className="mx-auto aspect-square max-h-[250px] relative"
+            className="relative mx-auto aspect-square max-h-[250px] w-full"
           >
             <RechartsPieChart>
               <ChartTooltip
@@ -60,7 +62,7 @@ export function PieChart({ score }) {
                 data={chartData}
                 dataKey="visitors"
                 nameKey="browser"
-                innerRadius={65}
+                innerRadius={60}
                 strokeWidth={5}
               />
             </RechartsPieChart>
@@ -70,9 +72,9 @@ export function PieChart({ score }) {
                   "https://res.cloudinary.com/dcvjujoc3/image/upload/v1721474405/vmcf9eaemmx7wis6aewt.jpg"
                 }
                 alt="dart"
-                width={90}
-                height={90}
-                className="rounded-full mt-1 ml-2"
+                width={70}
+                height={70}
+                className="rounded-full"
               />
             </div>
           </ChartContainer>

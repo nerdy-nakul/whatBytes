@@ -44,15 +44,15 @@ const chartConfig = {
 
 export function LineGraph() {
   return (
-    <Card className="border w-full">
+    <Card className="border w-full max-w-full md:max-w-4xl mx-auto">
       <CardHeader>
-        <CardTitle>Comparision Graph</CardTitle>
-        <div className="flex justify-between items-center gap-5">
-          <p className="">
+        <CardTitle>Comparison Graph</CardTitle>
+        <div className="flex flex-col md:flex-row justify-between items-center gap-5">
+          <p className="text-sm md:text-base text-center md:text-left">
             You scored 100% percentile which is greater than the average
-            percentile 72% of all engineers who took this assessment
+            percentile 72% of all engineers who took this assessment.
           </p>
-          <div className=" flex justify-center items-center w-12 h-12 bg-slate-200 rounded-full p-3">
+          <div className="flex justify-center items-center w-12 h-12 bg-slate-200 rounded-full p-3">
             <Image
               src={
                 "https://res.cloudinary.com/debw7vpqa/image/upload/v1721431660/graph_qvhke4.png"
@@ -60,63 +60,67 @@ export function LineGraph() {
               alt="graph"
               width={20}
               height={20}
-            ></Image>
+            />
           </div>
         </div>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig}>
-          <LineChart
-            accessibilityLayer
-            data={chartData}
-            margin={{
-              left: 12,
-              right: 12,
-              bottom: 24, // Add margin at the bottom for extra space
-            }}
-          >
-            <XAxis
-              dataKey="percentile"
-              tickMargin={10}
-              padding={{ left: 10, right: 10 }}
-              tickFormatter={(value) =>
-                [0, 25, 50, 75, 100].includes(value) ? value : ""
-              }
-            />
-            <ChartTooltip
-              content={
-                <ChartTooltipContent
-                  className="w-[150px] ml-[-75px] border-none shadow-none"
-                  formatter={(name) => `Your percentile is ${name}`}
-                  labelFormatter={() => ""}
-                />
-              }
-            />
-            <Line
-              dataKey="data"
-              type="natural"
-              stroke="#d39bf7"
-              strokeWidth={1.5}
-              dot={({ cx, cy, payload }) => {
-                const r = 10;
-                return (
-                  <Circle
-                    key={payload.percentile}
-                    x={cx - r / 2}
-                    y={cy - r / 2}
-                    width={r}
-                    height={r}
-                    fill="#fff"
-                    stroke="#d39bf7"
+        <div className="w-full overflow-x-auto">
+          <ChartContainer config={chartConfig}>
+            <LineChart
+              accessibilityLayer
+              data={chartData}
+              margin={{
+                left: 12,
+                right: 12,
+                bottom: 24, // Add margin at the bottom for extra space
+              }}
+              width={500} // Adjust the width for responsiveness
+              height={300}
+            >
+              <XAxis
+                dataKey="percentile"
+                tickMargin={10}
+                padding={{ left: 10, right: 10 }}
+                tickFormatter={(value) =>
+                  [0, 25, 50, 75, 100].includes(value) ? value : ""
+                }
+              />
+              <ChartTooltip
+                content={
+                  <ChartTooltipContent
+                    className="w-[150px] ml-[-75px] border-none shadow-none"
+                    formatter={(name) => `Your percentile is ${name}`}
+                    labelFormatter={() => ""}
                   />
-                );
-              }}
-              activeDot={{
-                r: 6,
-              }}
-            />
-          </LineChart>
-        </ChartContainer>
+                }
+              />
+              <Line
+                dataKey="data"
+                type="natural"
+                stroke="#d39bf7"
+                strokeWidth={1.5}
+                dot={({ cx, cy, payload }) => {
+                  const r = 10;
+                  return (
+                    <Circle
+                      key={payload.percentile}
+                      x={cx - r / 2}
+                      y={cy - r / 2}
+                      width={r}
+                      height={r}
+                      fill="#fff"
+                      stroke="#d39bf7"
+                    />
+                  );
+                }}
+                activeDot={{
+                  r: 6,
+                }}
+              />
+            </LineChart>
+          </ChartContainer>
+        </div>
       </CardContent>
     </Card>
   );

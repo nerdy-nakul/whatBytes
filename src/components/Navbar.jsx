@@ -19,6 +19,7 @@ const Navbar = () => {
             alt="Website Logo"
             height={225}
             width={225}
+            className="object-contain"
           />
         </div>
         <div className="flex items-center space-x-2 border py-1 px-2 rounded-lg transition">
@@ -41,6 +42,7 @@ const Navbar = () => {
             alt="Website Logo"
             height={120}
             width={120}
+            className="object-contain"
           />
         </div>
         <div>
