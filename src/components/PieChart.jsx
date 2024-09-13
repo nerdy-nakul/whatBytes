@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import { Pie, PieChart as RechartsPieChart } from "recharts";
 
 import { Card, CardContent } from "@/components/ui/card";
@@ -22,23 +22,30 @@ const chartConfig = {
 };
 
 export function PieChart({ score }) {
-  const chartData = [
-    { browser: "chrome", visitors: score, fill: "rgb(37 99 235)" },
-    { browser: "other", visitors: 15 - score, fill: "rgb(191 225 250)" },
-  ];
+  const [chartData, setChartData] = useState([]);
 
-  const totalVisitors = React.useMemo(() => {
-    return chartData.reduce((acc, curr) => acc + curr.visitors, 0);
+  useEffect(() => {
+    console.log("Updating chart data with score:", score); // Log score to verify it's being updated
+    const updatedData = [
+      { browser: "chrome", visitors: Number(score), fill: "rgb(37 99 235)" },
+      { browser: "other", visitors: 15 - score, fill: "rgb(191 225 250)" },
+    ];
+    setChartData(updatedData);
   }, [score]);
 
+  // console.log(chartData);
+
   return (
-    <div className="border rounded-lg p-4 md:p-6 lg:p-10 mt-4 md:mt-5">
+    <div
+      key={score}
+      className="border rounded-lg p-4 md:p-6 lg:p-10 mt-4 md:mt-5"
+    >
       <div className="flex flex-col md:flex-row justify-between">
         <p className="font-bold text-lg text-center md:text-left">
           Question Analysis
         </p>
         <p className="text-lg text-blue-700 font-bold text-center md:text-left">
-          {`${score}/${totalVisitors}`}
+          {`${score}/15`}
         </p>
       </div>
       <p className="text-gray-600 mt-2 text-center md:text-left">

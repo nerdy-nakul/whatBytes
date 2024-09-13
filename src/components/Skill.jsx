@@ -28,9 +28,9 @@ const Skill = () => {
     <div className="w-full mb-5 p-4 sm:p-6 md:p-8 lg:p-10">
       <p className="text-xl mt-5">Skill Test</p>
       <div className="flex flex-col md:flex-row gap-4">
-        <div className="flex flex-col w-full md:w-2/3">
-          <div className="mt-5 flex flex-col md:flex-row justify-between border rounded-lg py-2 md:py-4 lg:py-5 px-4">
-            <div className="flex items-center gap-4">
+        <div className="flex flex-col md:w-2/3">
+          <div className="mt-5 flex flex-col  md:flex-row justify-between border rounded-lg py-2 md:py-4 lg:py-5 px-4">
+            <div className="flex items-center gap-4 md:gap-20 justify-between">
               <Image
                 src="https://res.cloudinary.com/debw7vpqa/image/upload/v1721431123/html_apn4wf.jpg"
                 alt="HTML logo"
@@ -111,7 +111,7 @@ const Skill = () => {
           </div>
 
           <div className="mt-5">
-            <LineGraph />
+            <LineGraph score={score} percentile={percentile} />
           </div>
         </div>
         <div className="w-full md:w-1/3">
